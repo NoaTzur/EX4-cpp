@@ -180,6 +180,10 @@ Player& Player::fly_direct(const City &c) {
     return *this;
 }
 
+void Player::remove_cards(){
+    _player_cards.clear();
+}
+
 Player::Player(Board &board, City city): _board(board), _city(city){
     
 }

@@ -20,7 +20,7 @@ public:
     virtual Player& build();
     virtual Player& discover_cure (const Color &color) ;
     virtual Player& treat(const City &c);
-
+    void remove_cards();
     virtual std::string role();
     Player& take_card(const City& c);
 

@@ -50,6 +50,7 @@ class Board
     void create_board();
     bool is_clean();
     void remove_cures();
+    void remove_stations();
 
     int& operator[](City c){
         

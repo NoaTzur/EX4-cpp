@@ -165,6 +165,11 @@ void Board::remove_cures(){
     _is_cure_found[Color::Black] = false;
     _is_cure_found[Color::Red] = false;
 }
+
+void Board::remove_stations(){
+    for (map <City, Square>::iterator it=cities_map.begin(); it!=cities_map.end(); ++it)
+        it->second._is_station=false;
+}
 Square::~Square(){
 
 }
