@@ -2,6 +2,7 @@
 #include "Board.hpp"
 #include <algorithm>
 using namespace std;
+const int min_cards_for_cure = 5;
 namespace pandemic {
 
 
@@ -24,7 +25,9 @@ Player& Player::fly_charter(const City &c) {
     
 }
 Player& Player::fly_shuttle(const City &c){
-    
+    if(_city == c){
+    	throw std::invalid_argument("cant fly, already in this city");
+    }
     if(_board.cities_map[_city]._is_station &&  _board.cities_map[c]._is_station){
         //erase player from the list of players of the previus city
         _board.cities_map[_city]._players_on_square.erase(this);
@@ -45,14 +48,15 @@ Player& Player::build(){
     if (!(_board.cities_map[_city]._is_station) && _player_cards.count(_city) == 1 )
     {
         _player_cards.erase(_city);
-        // this->_board.cities_map.at(_city)._card_exist = true;
+        
         _board.cities_map[_city]._is_station = true;
+        
 
     }
-    else{
-         throw std::invalid_argument("not in the player cards or already a research station");
+    else if (_player_cards.count(_city) != 1) {
+    	throw std::invalid_argument("dont have this card");
     }
-    
+   
     
     return *this;
     
@@ -67,7 +71,7 @@ Player& Player::discover_cure (const Color &color) {
 
         for (auto card : _player_cards) //checks if there is 5 cards from the same color
         {
-            if (counter == 5)
+            if (counter == min_cards_for_cure)
             {
                 break;
             }
@@ -80,17 +84,17 @@ Player& Player::discover_cure (const Color &color) {
             }   
         }
 
-        if (counter == 5)
+        if (counter == min_cards_for_cure)
         {
             _board._is_cure_found[color] = true; //cure
             for (auto card : temp_cards) //throw 5 cards
             {
                 _player_cards.erase(card);
-                // this->_board.cities_map.at(card)._card_exist = true;
+                
             }
         }       
     }
-    if (counter < 5)
+    if (counter < min_cards_for_cure)
     {
         throw std::invalid_argument("not enough cards for this color");
     }
@@ -108,23 +112,19 @@ Player& Player::treat(const City &c){
     {
         throw std::invalid_argument("the player is not in this city !");
     }
-    
-
-    if (_board.cities_map[_city]._number_of_dice > 0)
-    {   
-        Color curr_color = _board.cities_map[_city]._color;
-        if (_board._is_cure_found[curr_color])
-        {
-            _board.cities_map[_city]._number_of_dice = 0;
-        }
-        else{
-            _board.cities_map[_city]._number_of_dice--;
-        } 
-
+    if (_board.cities_map[_city]._number_of_dice == 0){
+    	 throw std::invalid_argument("number of dice is already 0");
+	}
+   
+    Color curr_color = _board.cities_map[_city]._color;
+    cout << "discover cure scientist " << _board._is_cure_found[curr_color] <<endl; 
+    if (_board._is_cure_found[curr_color])
+    {
+	_board.cities_map[_city]._number_of_dice = 0;
     }
     else{
-         throw std::invalid_argument("number of dice is already 0");
-    }
+	_board.cities_map[_city]._number_of_dice--;
+    } 
 
     return *this;
     
@@ -137,19 +137,16 @@ Player& Player::treat(const City &c){
 
 Player& Player::take_card(const City& c){
     
-    // bool temp = this->_board.cities_map.at(c)._card_exist;
-    // if (temp)
-    // {
-    //    this->_board.cities_map.at(c)._card_exist = false; 
+ 
     this->_player_cards.insert(c);
-    // }
-
+   
     return *this;
     }
 
 Player& Player::drive(const City& c){
+	
 
-    if (this->_board.cities_map[_city]._connected_cities.count(c) == 1){
+    if (this->_board.cities_map[_city]._connected_cities.count(c) != 0){
             
         //erase player from the list of players of the previus city
         _board.cities_map[_city]._players_on_square.erase(this);
@@ -168,7 +165,7 @@ Player& Player::fly_direct(const City &c) {
     if(this->_player_cards.count(c) == 1 ){
         //erase player from the list of players of the previus city
         _board.cities_map[_city]._players_on_square.erase(this);
-        // this->_board.cities_map.at(c)._card_exist = true;
+
 
         _city = c;
         _board.cities_map[_city]._players_on_square.insert(this); // adding the player to the new Square(new city)

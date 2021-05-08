@@ -20,9 +20,9 @@ void Board::create_board(){
     set<City> MA_cities = {City::NewYork, City::London, City::Paris, City::SaoPaulo, City::Algiers};//madrid
     set<City> LO_cities = {City::NewYork, City::Madrid, City::Paris, City::Essen};//london
     set<City> PA_cities = {City::London, City::Madrid, City::Essen, City::Milan, City::Algiers}; //paris
-    set<City> MI_cities = {City::Paris, City::Essen, City::Istanbull};//milan
+    set<City> MI_cities = {City::Paris, City::Essen, City::Istanbul};//milan
     set<City> ES_cities = {City::London, City::Paris, City::Milan, City::StPetersburg}; //essen
-    set<City> ST_cities = {City::Essen, City::Istanbull, City::Moscow};//st.peterburg
+    set<City> ST_cities = {City::Essen, City::Istanbul, City::Moscow};//st.peterburg
     
 
     //connected city - yellow
@@ -42,10 +42,10 @@ void Board::create_board(){
 
 
     //connected city - black
-    set<City> ALG_cities = {City::Madrid, City::Paris,City::Istanbull, City::Cairo}; //algiers
-    set<City> INS_cities = {City::Milan, City::StPetersburg, City::Moscow, City::Algiers, City::Cairo,City::Baghdad};//instanbul
-    set<City> CIA_cities = {City::Istanbull, City::Algiers, City::Baghdad,City::Riyadh, City::Khartoum};//ciaro
-    set<City> BAGD_cities = {City::Istanbull, City::Cairo,City::Riyadh,City::Karachi,City::Tehran};//bagdad
+    set<City> ALG_cities = {City::Madrid, City::Paris,City::Istanbul, City::Cairo}; //algiers
+    set<City> INS_cities = {City::Milan, City::StPetersburg, City::Moscow, City::Algiers, City::Cairo,City::Baghdad};//Istanbul
+    set<City> CIA_cities = {City::Istanbul, City::Algiers, City::Baghdad,City::Riyadh, City::Khartoum};//ciaro
+    set<City> BAGD_cities = {City::Istanbul, City::Cairo,City::Riyadh,City::Karachi,City::Tehran};//bagdad
     set<City> TEH_cities = {City::Moscow, City::Baghdad, City::Karachi, City::Delhi};//teheran
     set<City> RIY_cities = {City::Cairo, City::Baghdad,City::Karachi};//Riyadh
 
@@ -54,7 +54,7 @@ void Board::create_board(){
     set<City> MUM_cities = {City::Karachi, City::Delhi, City::Chennai}; //mumbai
     set<City> CHEN_cities = {City::Mumbai, City::Delhi, City::Kolkata, City::Bangkok,City::Jakarta};//Chennai
     set<City> KOL_cities = {City::Delhi, City::Chennai, City::Bangkok, City::HongKong}; //kolkata
-    set<City> MOS_cities = {City::StPetersburg, City::Istanbull, City::Tehran};//moscow
+    set<City> MOS_cities = {City::StPetersburg, City::Istanbul, City::Tehran};//moscow
 
     //connected city - red
     set<City> BEI_cities = {City::Shanghai, City::Seoul}; //beijing
@@ -104,8 +104,8 @@ void Board::create_board(){
 
 
     //black
-    cities_map[City::Istanbull] = Square{City::Istanbull, Color::Black, 0, INS_cities};
-    cities_map[City::Algiers] = Square{City::Algiers, Color::Black, 0, INS_cities};
+    cities_map[City::Istanbul] = Square{City::Istanbul, Color::Black, 0, INS_cities};
+    cities_map[City::Algiers] = Square{City::Algiers, Color::Black, 0, ALG_cities};
     cities_map[City::Moscow] = Square{City::Moscow, Color::Black, 0, MOS_cities};
     cities_map[City::Tehran] = Square{City::Tehran, Color::Black, 0, TEH_cities};
     cities_map[City::Baghdad] = Square{City::Baghdad, Color::Black, 0, BAGD_cities};
@@ -167,8 +167,9 @@ void Board::remove_cures(){
 }
 
 void Board::remove_stations(){
-    for (map <City, Square>::iterator it=cities_map.begin(); it!=cities_map.end(); ++it)
+    for (map <City, Square>::iterator it=cities_map.begin(); it!=cities_map.end(); ++it){
         it->second._is_station=false;
+       }
 }
 Square::~Square(){
 

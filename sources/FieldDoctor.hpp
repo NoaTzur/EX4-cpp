@@ -10,24 +10,25 @@ private:
     /* data */
 public:
     Player& treat(const City &c){
-        
+    	if(_board.cities_map[c]._number_of_dice == 0)
+    		throw std::invalid_argument("number of dice is already 0");
+        	
         if (_board.cities_map[_city]._connected_cities.count(c) == 1 || _city == c)
         {
-            if (_board.cities_map[c]._number_of_dice > 0)
-            {   
-                Color curr_color = _board.cities_map[c]._color;
-                if (_board._is_cure_found[curr_color])
-                {
-                    _board.cities_map[c]._number_of_dice = 0;
-                }
-                else{
-                    _board.cities_map[c]._number_of_dice--;
-                } 
+            
+		Color curr_color = _board.cities_map[c]._color;
+		if (_board._is_cure_found[curr_color])
+		{
+		    _board.cities_map[c]._number_of_dice = 0;
+		}
+		else{
+		    _board.cities_map[c]._number_of_dice--;
+		} 
 
-            }
-            else{
-                 throw std::invalid_argument("number of dice is already 0");
-            }
+           
+        }
+        else{
+        	throw std::invalid_argument("not nearby city");
         }
 
         return *this;

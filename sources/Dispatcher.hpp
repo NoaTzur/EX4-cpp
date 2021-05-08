@@ -13,6 +13,10 @@ namespace pandemic {
     public:
 
         Player& fly_direct(const City &c) {//if he is in research station - dont throw card
+        	if(_city == c){
+        		throw std::invalid_argument("cant fly to the current city");
+        	}
+        		
             if(_board.cities_map[_city]._is_station){
  
                 _city = c;

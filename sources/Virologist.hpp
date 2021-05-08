@@ -12,12 +12,12 @@ namespace pandemic {
 
         Player& treat(const City &c){
             
-            if(this->_player_cards.count(c) == 1){
+            if(this->_player_cards.count(c) == 1 || c == this->_city){
 
                 if (c != this->_city)//the virilogist is in the city we want to cure
                 {
                     _player_cards.erase(c);  //erase the card from the playes list                
-                    // _board.cities_map.at(c)._card_exist = true; //return the card to the cards stack 
+                    
                 }
 
                 if (_board.cities_map[c]._number_of_dice > 0)

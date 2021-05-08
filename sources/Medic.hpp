@@ -6,7 +6,6 @@ namespace pandemic {
 
   class Medic : public Player
   {
-  private:
 
   public:
     
@@ -15,7 +14,7 @@ namespace pandemic {
       
       Player::drive(c);
       Color temp = _board.cities_map[c]._color;
-      if (_board._is_cure_found[temp])
+      if (_board._is_cure_found[temp]&& _board.cities_map[c]._number_of_dice > 0)
       {
         Medic::treat(c);
       }
@@ -26,7 +25,7 @@ namespace pandemic {
       
       Player::fly_direct(c);
       Color temp = _board.cities_map[c]._color;
-      if (_board._is_cure_found[temp])
+      if (_board._is_cure_found[temp]&& _board.cities_map[c]._number_of_dice > 0)
       {
         Medic::treat(c);
       }
@@ -36,7 +35,7 @@ namespace pandemic {
       
       Player::fly_charter(c);
       Color temp = _board.cities_map[c]._color;
-      if (_board._is_cure_found[temp])
+      if (_board._is_cure_found[temp]&& _board.cities_map[c]._number_of_dice > 0)
       {
         Medic::treat(c);
       }
@@ -47,22 +46,23 @@ namespace pandemic {
       
       Player::fly_shuttle(c);
       Color temp = _board.cities_map[c]._color;
-      if (_board._is_cure_found[temp])
+      if (_board._is_cure_found[temp] && _board.cities_map[c]._number_of_dice > 0)
       {
         Medic::treat(c);
       }
       return *this;
     }
     Player& treat(const City &c){//if there is a cure for the specific color, call treat in every city he goto
-
-    if (_board.cities_map[_city]._number_of_dice > 0)
-    {   
-      _board.cities_map[_city]._number_of_dice = 0;
-    }
-    else{
-         throw std::invalid_argument("number of dice is already 0");
-    }
-
+	
+	
+	    if (_board.cities_map[_city]._number_of_dice > 0)
+	    {   
+	      _board.cities_map[_city]._number_of_dice = 0;
+	    }
+	    else{
+		 throw std::invalid_argument("number of dice is already 0");
+	    }
+	
 
     return *this;
     } 

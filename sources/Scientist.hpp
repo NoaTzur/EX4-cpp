@@ -28,12 +28,7 @@ namespace pandemic {
                 {
                     if (counter == _n)
                     {
-                        _board._is_cure_found[color] = true; //cure
-                        for (auto card : temp_cards) //throw n cards
-                        {
-                            _player_cards.erase(card);
-                            // this->_board.cities_map.at(card)._card_exist = true;
-                        }
+                     
                         break;
                     }
                     
@@ -44,7 +39,17 @@ namespace pandemic {
                     
                     }
                     
-                }       
+                } 
+                
+                if(counter == _n){
+                
+                _board._is_cure_found[color] = true; //cure
+                        for (auto card : temp_cards) //throw n cards
+                        {
+                            _player_cards.erase(card);
+                            // this->_board.cities_map.at(card)._card_exist = true;
+                        }  
+                 }    
             }
             if (counter < _n)
             {

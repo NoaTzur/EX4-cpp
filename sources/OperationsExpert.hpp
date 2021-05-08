@@ -13,16 +13,12 @@ namespace pandemic {
 
         Player& build(){//dont throw card like the father func
             
-            if (!(_board.cities_map[_city]._is_station))
-            {
-                
-                _board.cities_map[_city]._is_station = true;
-
-            }
-            else{
-                 throw std::invalid_argument("not in the player cards or already a research station");
-            }
             
+                
+            _board.cities_map[_city]._is_station = true;
+
+            
+         
             return *this;
 
         } 

@@ -7,15 +7,15 @@ namespace pandemic {
     enum City {
 
         //blue
-        SanFrancisco,
-        Chicago,
+        SanFrancisco, //1
+        Chicago, //2
         Montreal,
         NewYork,
         Atlanta,
         Washington,
         Madrid,
         London,
-        Essen,
+        Essen, //9
         Milan,
         Paris,
         StPetersburg,
@@ -24,7 +24,7 @@ namespace pandemic {
         LosAngeles,
         MexicoCity,
         Miami,
-        Bogota,
+        Bogota, // 16
         Lima,
         Santiago,
         BuenosAires,
@@ -32,15 +32,15 @@ namespace pandemic {
         Lagos,
         Khartoum,
         Kinshasa,
-        Johannesburg,
+        Johannesburg, //24
 
         //black
         Moscow,
-        Istanbull,
+        Istanbul, //26
         Algiers,
         Cairo,
         Baghdad,
-        Tehran,
+        Tehran, //30
         Delhi,
         Riyadh,
         Karachi,
@@ -49,14 +49,14 @@ namespace pandemic {
         Chennai,
 
         //red
-        Beijing,
+        Beijing, //37
         Shanghai,
         Seoul,
         Tokyo,
         Osaka,
         Taipei,
         HongKong,
-        Bangkok,
+        Bangkok, //44
         Manila,
         Jakarta,
         HoChiMinhCity,
